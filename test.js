@@ -57,4 +57,29 @@ async function auth0_action(){
     });
 }
 
-auth0_action()
+//auth0_action()
+
+async function auth0_post(){
+
+  var main_data = {
+  "username" : username,
+  "password" : password}
+
+  await axios.post(join_url, main_data)
+    .then(response => {
+    console.log(response.data)
+    if(response.data.status === 'success'){
+      console.log(0)
+    }
+
+    })
+    .catch(error => {
+      let error_message = error.response.data.message;
+      console.log(error_message);
+      if(error_message === "User already registered"){
+        console.log(1)
+      }
+  });
+};
+
+auth0_post()
